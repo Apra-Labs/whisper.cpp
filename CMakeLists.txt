@@ -477,9 +477,7 @@ add_library(${TARGET}
 
 include(DefaultTargetOptions)
 
-target_include_directories(${TARGET} PUBLIC
-    .
-    )
+target_include_directories(${TARGET} PUBLIC "")
 
 if (WHISPER_COREML)
     target_link_libraries(${TARGET} PRIVATE whisper.coreml)
@@ -538,6 +536,7 @@ set_target_properties(${TARGET} PROPERTIES PUBLIC_HEADER "ggml.h;whisper.h")
 include(GNUInstallDirs)
 
 install(TARGETS ${TARGET}
+    EXPORT WhisperCppASRTargets
     LIBRARY  DESTINATION lib
     ARCHIVE  DESTINATION lib/static
     RUNTIME  DESTINATION bin
@@ -545,9 +544,23 @@ install(TARGETS ${TARGET}
     PUBLIC_HEADER DESTINATION include
     )
 
+install(EXPORT WhisperCppASRTargets
+    FILE WhisperCppASRTargets.cmake
+    NAMESPACE whisper::
+    DESTINATION lib/cmake/WhisperCppASR)
+
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+    "WhisperCppASRVersion.cmake"
+    VERSION 1.5.1
+    COMPATIBILITY AnyNewerVersion)
 #
 # bindings
 #
+
+install(FILES "Config.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/WhisperCppASRVersion.cmake"
+    DESTINATION lib/cmake/WhisperCppASR)
 
 add_subdirectory(bindings)
 
