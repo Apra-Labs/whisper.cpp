@@ -6,7 +6,6 @@ project(whisper.cpp VERSION 1.5.1)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(WHISPER_STANDALONE ON)
     include(GitVars)
@@ -477,7 +476,10 @@ add_library(${TARGET}
 
 include(DefaultTargetOptions)
 
-target_include_directories(${TARGET} PUBLIC "")
+target_include_directories(${TARGET} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  $<INSTALL_INTERFACE:include>  # <prefix>/include/mylib
+)
 
 if (WHISPER_COREML)
     target_link_libraries(${TARGET} PRIVATE whisper.coreml)
