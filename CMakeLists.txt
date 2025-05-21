@@ -49,7 +49,7 @@ option(WHISPER_SANITIZE_THREAD        "whisper: enable thread sanitizer"    OFF)
 option(WHISPER_SANITIZE_ADDRESS       "whisper: enable address sanitizer"   OFF)
 option(WHISPER_SANITIZE_UNDEFINED     "whisper: enable undefined sanitizer" OFF)
 
-option(WHISPER_BUILD_TESTS            "whisper: build tests"    ${WHISPER_STANDALONE})
+option(WHISPER_BUILD_TESTS            "whisper: build tests"    OFF)
 option(WHISPER_BUILD_EXAMPLES         "whisper: build examples" OFF)
 
 option(WHISPER_SDL2                   "whisper: support for libSDL2" OFF)
