@@ -17,7 +17,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     endif()
     configure_file(${CMAKE_SOURCE_DIR}/bindings/javascript/package-tmpl.json ${CMAKE_SOURCE_DIR}/bindings/javascript/package.json @ONLY)
 else()
-    set(WHISPER_STANDALONE ON)
+    set(WHISPER_STANDALONE OFF)
 endif()
 
 if (EMSCRIPTEN)
@@ -50,7 +50,7 @@ option(WHISPER_SANITIZE_ADDRESS       "whisper: enable address sanitizer"   OFF)
 option(WHISPER_SANITIZE_UNDEFINED     "whisper: enable undefined sanitizer" OFF)
 
 option(WHISPER_BUILD_TESTS            "whisper: build tests"    ${WHISPER_STANDALONE})
-option(WHISPER_BUILD_EXAMPLES         "whisper: build examples" ${WHISPER_STANDALONE})
+option(WHISPER_BUILD_EXAMPLES         "whisper: build examples" OFF)
 
 option(WHISPER_SDL2                   "whisper: support for libSDL2" OFF)
 
